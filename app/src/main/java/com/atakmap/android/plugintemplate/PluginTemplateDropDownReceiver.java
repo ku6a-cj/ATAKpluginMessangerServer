@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.atakmap.coremap.log.Log;
+import com.atakmap.map.layer.feature.Feature;
 
 import java.util.UUID;
 
@@ -73,6 +74,17 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             @Override
             public void onClick(View v) {
                 createAircraftWithRotation();
+            }
+        });
+
+
+        Button addAnAtackAircraft = myFirstFragment.findViewById(R.id.button3);
+        final Button addAnAtackAircraft1 = myFirstFragment.findViewById(R.id.button3);
+
+        addAnAtackAircraft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAtackAircraftWithRotation();
             }
         });
 
@@ -138,15 +150,25 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     public void onDropDownClose() {
     }
 
+String CallString= "BlackWidow";
+String TypeString= "Aircraft";
+int numberOfIteration = 0;
+
+
     public void createAircraftWithRotation() {
         PlacePointTool.MarkerCreator mc = new PlacePointTool.MarkerCreator(
                 getMapView().getPointWithElevation());
         mc.setUid(UUID.randomUUID().toString());
-        mc.setCallsign("Alfa-Bravo");
-        mc.setType("BlackWidow");
+        mc.setCallsign(String.valueOf(CallString)+" "+numberOfIteration);
+        numberOfIteration=numberOfIteration+1;
+        mc.setType(String.valueOf(TypeString));
         mc.showCotDetails(false);
         mc.setNeverPersist(true);
         Marker m = mc.placePoint();
+        TextView Callsign = myFirstFragment.findViewById(R.id.textView2);
+        TextView Type = myFirstFragment.findViewById(R.id.textView1);
+        Callsign.setText(CallString+" "+numberOfIteration);
+        Type.setText(TypeString);
         // the stle of the marker is by default set to show an arrow, this will allow for full
         // rotation.   You need to enable the heading mask as well as the noarrow mask
         m.setStyle(m.getStyle()
@@ -160,5 +182,37 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 this.getClass());
 
     }
+
+    String CallString2= "Riper";
+    String TypeString2= "Atack Aircraft";
+    int numberOfIteration2 = 0;
+
+    public void createAtackAircraftWithRotation() {
+        PlacePointTool.MarkerCreator mc = new PlacePointTool.MarkerCreator(
+                getMapView().getPointWithElevation());
+        mc.setUid(UUID.randomUUID().toString());
+        mc.setCallsign(String.valueOf(CallString2)+" "+numberOfIteration2);
+        numberOfIteration2=numberOfIteration2+1;
+        mc.setType(String.valueOf(TypeString2));
+        mc.showCotDetails(false);
+        mc.setNeverPersist(true);
+        Marker m = mc.placePoint();
+        TextView Callsign = myFirstFragment.findViewById(R.id.textView2);
+        TextView Type = myFirstFragment.findViewById(R.id.textView1);
+        Callsign.setText(CallString2+" "+numberOfIteration2);
+        Type.setText(TypeString2);
+        // the stle of the marker is by default set to show an arrow, this will allow for full
+        // rotation.   You need to enable the heading mask as well as the noarrow mask
+        m.setStyle(m.getStyle()
+                | Marker.STYLE_ROTATE_HEADING_MASK
+                | Marker.STYLE_ROTATE_HEADING_NOARROW_MASK);
+        m.setTrack(310, 20);
+        m.setMetaInteger("color", Color.RED);
+        m.setMetaString(UserIcon.IconsetPath, "34ae1613-9645-4222-a9d2-e5f243dea2865/Military/A10.png");
+        m.refresh(getMapView().getMapEventDispatcher(), null,
+                this.getClass());
+
+    }
+
 
 }

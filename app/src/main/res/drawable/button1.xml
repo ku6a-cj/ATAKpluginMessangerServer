@@ -7,7 +7,7 @@
         android:color="#FFF9F9"
         android:width="1dp"/>
     <corners
-        android:radius="190dp"/>
+        android:radius="180dp"/>
     <solid
         android:color="#302E2E"/>
     <gradient
