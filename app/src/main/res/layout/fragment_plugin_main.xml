@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="#302E2E"
+    tools:context=".pluginMainFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:orientation="vertical"
+
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerVertical="true">
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#302E2E"
+            android:text="SI KONWÓJ" />
+
+
+
+        <com.atakmap.android.gui.PluginSpinner
+            android:id="@+id/spinner1"
+            style="@style/darkButton"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/func_arrays"
+            android:padding="6dp"
+            android:prompt="@string/func_prompt"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#302E2E"
+            android:text="CALLSIGN" />
+
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#302E2E"
+            android:text="TYPE" />
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:textColor="#FFF9F9"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button1"
+            android:layout_marginTop="5dp"
+            android:text="Dodaj Samolot" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button1"
+            android:textColor="#FFF9F9"
+            android:text="LOCALIZATION" />
+        <Button
+            android:id="@+id/button4"
+            android:textColor="#FFF9F9"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button1"
+            android:layout_marginTop="15dp"
+            android:text="BRAK ŁĄCZNOŚCI WŁĄCZ DZWIEK" />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
+
+
+

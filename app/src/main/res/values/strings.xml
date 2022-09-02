@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">KONWÓJ</string>
+    <!-- description -->
+    <string name="app_desc">This plugin demonstrate bare bones plugin UI, and may be used to start a new plugin project</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="func_prompt">Wybierz funkcjonalnosc</string>
+
+    <string-array name="func_arrays">
+        <item>Func 1</item>
+        <item>Func 2</item>
+        <item>Func 3</item>
+        <item>Func 4</item>
+        <item>Func 5</item>
+        <item>Func 6</item>
+        <item>Func 7</item>
+        <item>Func 8</item>
+    </string-array>
+
+</resources>

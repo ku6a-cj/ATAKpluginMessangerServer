@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/drawable/btn_gray.xml" value="0.1515" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/drawable/button1.xml" value="0.1515" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/drawable/new_dark_button_bg.xml" value="0.1515" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/drawable/new_dark_button_disabled.xml" value="0.1515" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/drawable/new_dark_button_selected.xml" value="0.1515" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/layout/fragment_plugin_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/layout/fragment_plugin_main1.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/MGPO/Downloads/atak-civ/plugin-examples/plugintemplate/app/src/main/res/layout/main_layout.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
