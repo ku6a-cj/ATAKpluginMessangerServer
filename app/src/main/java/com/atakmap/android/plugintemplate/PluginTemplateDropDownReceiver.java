@@ -1,36 +1,22 @@
 
 package com.atakmap.android.plugintemplate;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.atakmap.android.icons.UserIcon;
 import com.atakmap.android.maps.Marker;
 import com.atakmap.android.user.PlacePointTool;
-import com.atakmap.android.util.SimpleItemSelectedListener;
-import com.atakmap.coremap.maps.coords.GeoPoint;
 
 import com.atak.plugins.impl.PluginLayoutInflater;
 import com.atakmap.android.maps.MapView;
 import com.atakmap.android.plugintemplate.plugin.R;
 import com.atakmap.android.dropdown.DropDown.OnStateListener;
 import com.atakmap.android.dropdown.DropDownReceiver;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 import com.atakmap.coremap.log.Log;
 import com.atakmap.map.layer.feature.Feature;
 
@@ -102,6 +88,46 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
      //       }
      //   });
     //    spinner.setSelection(0);
+
+
+
+
+        String takCallsign = getMapView().getDeviceCallsign();
+
+
+        final String[] ns = {"S"};
+        final String[] we = {"E"};
+
+        TextView GeoLoc = myFirstFragment.findViewById(R.id.textView3);
+
+        final Button changeComunicate = myFirstFragment.findViewById(R.id.button4);
+       // changeComunicate.setText(takCallsign);
+
+
+        changeComunicate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int takMyLat = (int) getMapView().getLatitude();
+                int takMyLong = (int) getMapView().getLongitude();
+
+                if(takMyLat>0){
+                    ns[0] = "N";
+                }else{
+                    ns[0] ="S";
+                    takMyLat =takMyLat * -1;
+                }
+
+                if(takMyLong>0){
+                    we[0] = "E";
+                }else{
+                    we[0] ="W";
+                    takMyLong = takMyLong * -1;
+                }
+
+
+                GeoLoc.setText("Szerokosc:"+ takMyLat+ ns[0] +"  "+ "Dlugosc:"+ takMyLong + we[0] );
+            }
+        });
 
     }
 
@@ -184,7 +210,7 @@ int numberOfIteration = 0;
     }
 
     String CallString2= "Riper";
-    String TypeString2= "Atack Aircraft";
+    String TypeString2= "Strike Aircraft";
     int numberOfIteration2 = 0;
 
     public void createAtackAircraftWithRotation() {
@@ -206,13 +232,11 @@ int numberOfIteration = 0;
         m.setStyle(m.getStyle()
                 | Marker.STYLE_ROTATE_HEADING_MASK
                 | Marker.STYLE_ROTATE_HEADING_NOARROW_MASK);
-        m.setTrack(310, 20);
+        m.setTrack(310, 200);
         m.setMetaInteger("color", Color.RED);
         m.setMetaString(UserIcon.IconsetPath, "34ae1613-9645-4222-a9d2-e5f243dea2865/Military/A10.png");
         m.refresh(getMapView().getMapEventDispatcher(), null,
                 this.getClass());
 
     }
-
-
 }

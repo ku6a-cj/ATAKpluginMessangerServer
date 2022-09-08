@@ -76,6 +76,15 @@
             android:background="@drawable/button1"
             android:textColor="#FFF9F9"
             android:text="Dodaj Samolot Szturmowy" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Współrzędne położenia" />
+
         <Button
             android:id="@+id/button4"
             android:textColor="#FFF9F9"
@@ -84,7 +93,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/button1"
             android:layout_marginTop="15dp"
-            android:text="BRAK ŁĄCZNOŚCI WŁĄCZ DZWIEK" />
+            android:text="Wyswietl współrzędne położenia" />
 
 
     </LinearLayout>
