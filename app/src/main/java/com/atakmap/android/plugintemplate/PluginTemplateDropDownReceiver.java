@@ -8,17 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.atakmap.android.icons.UserIcon;
-import com.atakmap.android.maps.Marker;
-import com.atakmap.android.user.PlacePointTool;
-
 import com.atak.plugins.impl.PluginLayoutInflater;
-import com.atakmap.android.maps.MapView;
-import com.atakmap.android.plugintemplate.plugin.R;
 import com.atakmap.android.dropdown.DropDown.OnStateListener;
 import com.atakmap.android.dropdown.DropDownReceiver;
+import com.atakmap.android.icons.UserIcon;
+import com.atakmap.android.maps.MapView;
+import com.atakmap.android.maps.Marker;
+import com.atakmap.android.plugintemplate.plugin.R;
+import com.atakmap.android.user.PlacePointTool;
 import com.atakmap.coremap.log.Log;
-import com.atakmap.map.layer.feature.Feature;
 
 import java.util.UUID;
 
@@ -30,25 +28,21 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             .getSimpleName();
 
     public static final String SHOW_PLUGIN = "com.atakmap.android.plugintemplate.SHOW_PLUGIN";
-    private final View templateView;
-    private final Context pluginContext;
     private final View myFirstFragment;
-    private final View helloView = null;
 
     /**************************** CONSTRUCTOR *****************************/
 
     public PluginTemplateDropDownReceiver(final MapView mapView,
             final Context context) {
         super(mapView);
-        this.pluginContext = context;
 
 
         // Remember to use the PluginLayoutInflator if you are actually inflating a custom view
         // In this case, using it is not necessary - but I am putting it here to remind
         // developers to look at this Inflator
-        templateView = PluginLayoutInflater.inflate(context,
+        View templateView = PluginLayoutInflater.inflate(context,
                 R.layout.main_layout, null);
-        myFirstFragment = PluginLayoutInflater.inflate(pluginContext, R.layout.fragment_plugin_main, null);
+        myFirstFragment = PluginLayoutInflater.inflate(context, R.layout.fragment_plugin_main, null);
 
 
         final String[] selectLista = new String[1];
@@ -101,7 +95,10 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         TextView GeoLoc = myFirstFragment.findViewById(R.id.textView3);
 
         final Button changeComunicate = myFirstFragment.findViewById(R.id.button4);
+        final Button MyPositionButton = myFirstFragment.findViewById(R.id.button5);
+
        // changeComunicate.setText(takCallsign);
+
 
 
         changeComunicate.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +106,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             public void onClick(View v) {
                 int takMyLat = (int) getMapView().getLatitude();
                 int takMyLong = (int) getMapView().getLongitude();
+
 
                 if(takMyLat>0){
                     ns[0] = "N";
@@ -125,7 +123,32 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 }
 
 
-                GeoLoc.setText("Szerokosc:"+ takMyLat+ ns[0] +"  "+ "Dlugosc:"+ takMyLong + we[0] );
+                GeoLoc.setText("Dane widoku: Szerokosc:"+ takMyLat+ ns[0] +"  "+ "Dlugosc:"+ takMyLong + we[0] );
+            }
+        });
+
+        MyPositionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int LAT = (int) mapView.getSelfMarker().getPoint().getLatitude();
+                int LONG = (int) mapView.getSelfMarker().getPoint().getLongitude();
+                if(LAT>0){
+                    ns[0] = "N";
+                }else{
+                    ns[0] ="S";
+                    LAT =LAT * -1;
+                }
+
+                if(LONG>0){
+                    we[0] = "E";
+                }else{
+                    we[0] ="W";
+                    LONG = LONG * -1;
+                }
+
+
+                GeoLoc.setText(" Dane znacznika: Szerokosc:"+ LAT+ ns[0] +"  "+ "Dlugosc:"+ LONG + we[0] );
+
             }
         });
 

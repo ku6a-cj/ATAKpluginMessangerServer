@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
 
         android:layout_gravity="center"
@@ -93,7 +93,17 @@
             android:layout_centerInParent="true"
             android:background="@drawable/button1"
             android:layout_marginTop="15dp"
-            android:text="Wyswietl współrzędne położenia" />
+            android:text="Wyswietl współrzędne położenia widoku" />
+
+        <Button
+            android:id="@+id/button5"
+            android:textColor="#FFF9F9"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button1"
+            android:layout_marginTop="15dp"
+            android:text="Wyswietl współrzędne położenia znacznika" />
 
 
     </LinearLayout>
