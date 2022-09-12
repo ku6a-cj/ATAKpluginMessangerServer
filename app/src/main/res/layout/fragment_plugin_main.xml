@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="1000dp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="#302E2E"
@@ -11,10 +11,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
 
-        android:layout_gravity="center"
+        android:layout_gravity="top"
         android:gravity="center"
         android:layout_centerVertical="true">
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Współrzędne położenia" />
+            android:text="Lokalizacja" />
 
         <Button
             android:id="@+id/button4"
@@ -93,17 +93,57 @@
             android:layout_centerInParent="true"
             android:background="@drawable/button1"
             android:layout_marginTop="15dp"
-            android:text="Wyswietl współrzędne położenia widoku" />
+            android:text="Pokaz Lokalizacje" />
 
         <Button
-            android:id="@+id/button5"
-            android:textColor="#FFF9F9"
+            android:id="@+id/start_server"
             android:layout_width="240dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/button1"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="15dp"
-            android:text="Wyswietl współrzędne położenia znacznika" />
+            android:textColor="#FFF9F9"
+            android:background="@drawable/button1"
+            android:onClick="onClick"
+            android:text="Start Server" />
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_above="@+id/send_data"
+            android:layout_below="@+id/edMessage">
+
+            <LinearLayout
+                android:id="@+id/msgList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/edMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_server"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Message from Server" />
+
+        <Button
+            android:id="@+id/send_data"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15dp"
+            android:onClick="onClick"
+            android:text="Send Message to Client"
+            android:background="@drawable/button1"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>
@@ -111,8 +151,7 @@
 
 
 
-
-</LinearLayout>
+</ScrollView>
 
 
 
