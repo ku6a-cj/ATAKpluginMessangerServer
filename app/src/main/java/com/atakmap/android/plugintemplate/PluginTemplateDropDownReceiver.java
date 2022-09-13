@@ -422,27 +422,32 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             }else if (read.equals("1-DSS-0-0-0")){
                 createAtackAircraftWithRotation();
             }
-            int i=0;
+
+           int i=0;
+            read="ClientMessage-" + read;
             String[] words = read.split("-");
             for (String word : words) {
                 Log.e("tabliczka", words[i]);
                 i++;
             }
+            Log.e("jestem tu1", "do konca");
 
+            if(i>4){
+                if (words[2].equals("Flag") && words[1].equals("1")){
+                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                    cotEvent.setUID("default");
+                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                }
+                Log.e("jestem tu2", "do konca");
+                if (words[2].equals("EFlag") && words[1].equals("1")){
+                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                    cotEvent.setUID("enemy");
+                    cotEvent.setType("a-h-G-U-C-I");
+                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                }
 
-            if (words[1].equals("Flag")&& words[0].equals("1")){
-                CotEvent cotEvent = createPoint(Double.parseDouble(words[2]), Double.parseDouble(words[3]));
-                cotEvent.setUID("default");
-                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-                //Log.e("jestem tu", "do konca");
             }
 
-            if (words[1].equals("EFlag")&& words[0].equals("1")){
-                CotEvent cotEvent = createPoint(Double.parseDouble(words[2]), Double.parseDouble(words[3]));
-                cotEvent.setUID("enemy");
-                cotEvent.setType("a-h-G-U-C-I");
-                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-            }
 
 
 
@@ -461,6 +466,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                     break;
                 }
                 showMessage("Client : " + read, Color.GREEN);
+                Log.e("jestem tu4", "do konca");
             } catch (IOException e) {
                 e.printStackTrace();
             }
