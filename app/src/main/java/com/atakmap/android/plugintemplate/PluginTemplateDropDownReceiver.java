@@ -1,30 +1,16 @@
 
 package com.atakmap.android.plugintemplate;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
-import android.text.format.Formatter;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,12 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,26 +27,17 @@ import com.atakmap.android.cot.CotMapComponent;
 import com.atakmap.android.icons.UserIcon;
 import com.atakmap.android.maps.Marker;
 import com.atakmap.android.user.PlacePointTool;
-import com.atakmap.android.util.SimpleItemSelectedListener;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.cot.event.CotPoint;
-import com.atakmap.coremap.maps.coords.GeoPoint;
 
 import com.atak.plugins.impl.PluginLayoutInflater;
 import com.atakmap.android.maps.MapView;
 import com.atakmap.android.plugintemplate.plugin.R;
 import com.atakmap.android.dropdown.DropDown.OnStateListener;
 import com.atakmap.android.dropdown.DropDownReceiver;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 import com.atakmap.coremap.log.Log;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
-import com.atakmap.map.layer.feature.Feature;
 
-import java.util.Enumeration;
 import java.util.UUID;
 
 public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
@@ -206,6 +179,28 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             }
         });
 
+
+
+
+
+
+
+    }
+
+    private CotEvent createPoint(double lat, double lon){
+
+
+        CotPoint cotPoint = new CotPoint(lat, lon, 0.0, 2.0, 2.0);
+        CotEvent cotEvent = new CotEvent();
+        CoordinatedTime time= new CoordinatedTime();
+
+        cotEvent.setTime(time);
+        cotEvent.setStart(time);
+        cotEvent.setHow("h-e");
+        cotEvent.setType("a-f-G-U-C-I");
+        cotEvent.setStale(time.addMinutes(10));
+        cotEvent.setPoint(cotPoint);
+        return cotEvent;
     }
 
     private String getWifiIp() {
@@ -436,19 +431,17 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
 
             if (words[1].equals("Flag")&& words[0].equals("1")){
-                CotPoint cotPoint = new CotPoint(20, 30, 0.0, 2.0, 2.0 );
-                CotEvent cotEvent = new CotEvent();
-                CoordinatedTime time= new CoordinatedTime();
+                CotEvent cotEvent = createPoint(Double.parseDouble(words[2]), Double.parseDouble(words[3]));
+                cotEvent.setUID("default");
+                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                //Log.e("jestem tu", "do konca");
+            }
 
-                cotEvent.setTime(time);
-                cotEvent.setStart(time);
-                cotEvent.setHow("h-e");
-                cotEvent.setType("a-f-G-U-C-I");
-                cotEvent.setStale(time.addMinutes(10));
-                cotEvent.setPoint(cotPoint);
-                cotEvent.setUID("my UID");
-                CotMapComponent.getExternalDispatcher().dispatch(cotEvent);
-                Log.e("Jestem w funckji","ustawiam");
+            if (words[1].equals("EFlag")&& words[0].equals("1")){
+                CotEvent cotEvent = createPoint(Double.parseDouble(words[2]), Double.parseDouble(words[3]));
+                cotEvent.setUID("enemy");
+                cotEvent.setType("a-h-G-U-C-I");
+                CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
             }
 
 
