@@ -73,6 +73,8 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private final View myFirstFragment;
     private final View helloView = null;
     private TextView txt;
+    private int enemyCounter = 0;
+    private  int allyCounter = 0;
 
     /**************************** CONSTRUCTOR *****************************/
 
@@ -228,7 +230,8 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 txt.append(jsony);
                 if (response.body().getTitle().equals("Flag")){
                     CotEvent cotEvent = createPoint(response.body().getlat(), response.body().getlon());
-                    cotEvent.setUID("sojusznik");
+                    cotEvent.setUID("ally"+ allyCounter);
+                    allyCounter=+1;
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
 
@@ -491,13 +494,15 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             if(i>4){
                 if (words[2].equals("Flag") && words[1].equals("1")){
                     CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("default");
+                    cotEvent.setUID("ally"+allyCounter);
+                    allyCounter=+1;
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
                 Log.e("jestem tu2", "do konca");
                 if (words[2].equals("EFlag") && words[1].equals("1")){
                     CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("enemy");
+                    cotEvent.setUID("enemy"+enemyCounter);
+                    enemyCounter=+1;
                     cotEvent.setType("a-h-G-U-C-I");
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
