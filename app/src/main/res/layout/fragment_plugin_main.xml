@@ -145,6 +145,24 @@
             android:background="@drawable/button1"
             android:textColor="@android:color/white" />
 
+        <TextView
+            android:id="@+id/text_view_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text=""
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/getApiData"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFF9F9"
+            android:background="@drawable/button1"
+            android:text="Pobierz dane z API" />
+
 
     </LinearLayout>
 

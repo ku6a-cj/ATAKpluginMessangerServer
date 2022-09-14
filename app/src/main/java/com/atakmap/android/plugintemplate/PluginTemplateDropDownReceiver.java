@@ -26,6 +26,8 @@ import java.util.Date;
 import com.atakmap.android.cot.CotMapComponent;
 import com.atakmap.android.icons.UserIcon;
 import com.atakmap.android.maps.Marker;
+import com.atakmap.android.plugintemplate.plugin.DataModel;
+import com.atakmap.android.plugintemplate.plugin.MyAPI;
 import com.atakmap.android.user.PlacePointTool;
 import com.atakmap.coremap.cot.event.CotEvent;
 import com.atakmap.coremap.cot.event.CotPoint;
@@ -40,6 +42,12 @@ import com.atakmap.coremap.maps.time.CoordinatedTime;
 
 import java.util.UUID;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         OnStateListener {
 
@@ -47,7 +55,6 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private ServerSocket serverSocket;
     private Socket tempClientSocket;
     private Thread serverThread;
-
     private LinearLayout msgList;
     private Handler handler;
     private EditText edMessage;
@@ -65,6 +72,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
     private final Context pluginContext;
     private final View myFirstFragment;
     private final View helloView = null;
+    private TextView txt;
 
     /**************************** CONSTRUCTOR *****************************/
 
@@ -179,12 +187,56 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
             }
         });
 
+        Button getApiData = myFirstFragment.findViewById(R.id.getApiData);
+
+        getApiData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callApi();
+            }
+        });
 
 
+    }
+
+    private void callApi(){
+        txt = myFirstFragment.findViewById(R.id.text_view_result);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://run.mocky.io")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // Instance for interface
+        MyAPI MyAPICall = retrofit.create(MyAPI.class);
+
+        Call<DataModel> call = MyAPICall.getData();
+
+        call.enqueue(new Callback<DataModel>() {
+            @Override
+            public void onResponse(Call<DataModel> call, Response<DataModel> response) {
+                // that will be called on response
+                if (response.code()!=200){
+                    txt.setText("Check out the connection");
+                    return;
+                }
+                String jsony="";
+
+                jsony = "ID: "+ response.body().getid()+
+                        "\nTitle: "+ response.body().getTitle()+
+                        "\nLat: "+ response.body().getlat()+
+                        "\nLon: "+ response.body().getlon();
+                txt.append(jsony);
 
 
+            }
+
+            @Override
+            public void onFailure(Call<DataModel> call, Throwable t) {
+                //on failure
+            }
 
 
+        });
     }
 
     private CotEvent createPoint(double lat, double lon){

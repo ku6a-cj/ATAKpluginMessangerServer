@@ -106,6 +106,10 @@ dependencies {
     androidTestImplementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //converter for retrofit GSON
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 
 }
