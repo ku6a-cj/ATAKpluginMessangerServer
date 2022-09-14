@@ -226,7 +226,11 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                         "\nLat: "+ response.body().getlat()+
                         "\nLon: "+ response.body().getlon();
                 txt.append(jsony);
-
+                if (response.body().getTitle().equals("Flag")){
+                    CotEvent cotEvent = createPoint(response.body().getlat(), response.body().getlon());
+                    cotEvent.setUID("sojusznik");
+                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                }
 
             }
 
