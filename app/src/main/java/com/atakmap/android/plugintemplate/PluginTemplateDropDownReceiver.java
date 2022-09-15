@@ -106,7 +106,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
             @Override
             public void onClick(View view) {
-                removeAllViews();
+                //removeAllViews();
                 showMessage("Server Started.", Color.BLACK);
                 this.serverThread = new Thread(new ServerThread());
                 this.serverThread.start();
@@ -144,21 +144,8 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
         });
 
         String WIFi = getWifiIp();
-        Log.e("My wifi adress=",WIFi);
-        showMessage("My wifi adress="  + WIFi, Color.RED);
-        //implementacja po up menu
-        //   final Spinner spinner = helloView
-        //           .findViewById(R.id.spinner1);
-
-        //   spinner.setOnItemSelectedListener(new SimpleItemSelectedListener() {
-        //       @Override
-        //       public void onItemSelected(AdapterView<?> parent,
-        //                                 int position, long id) {
-        //          if (view instanceof TextView)
-        //              ((TextView) view).setTextColor(Color.WHITE);
-        //       }
-        //   });
-        //    spinner.setSelection(0);
+        ///Log.e("My IP adress=",WIFi);
+        showMessage("My IP adress="  + WIFi, Color.RED);
 
 
         final Button MyPositionButton = myFirstFragment.findViewById(R.id.button4);
@@ -494,9 +481,16 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
             if(i>4){
                 if (words[2].equals("Flag") && words[1].equals("1")){
+                    if(words[5].equals("1")){
+                        words[3] = "-"+words[3];
+                    }
+                    if(words[6].equals("1")){
+                        words[4] = "-"+words[4];
+                    }
                     CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("ally"+allyCounter);
-                    allyCounter=+1;
+                    cotEvent.setUID("ally"+String.valueOf(allyCounter));
+                    allyCounter=allyCounter+1;
+                    cotEvent.setType("a-f-G-U-C-I");
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
                 Log.e("jestem tu2", "do konca");
