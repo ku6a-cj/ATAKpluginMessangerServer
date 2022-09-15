@@ -471,6 +471,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 return;
             }
             showMessage("Connected to Client!!", Color.DKGRAY);
+            sendMessage("Connected to Server!!");
         }
 
         public void PopUp(String read)
@@ -500,9 +501,17 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 }
                 Log.e("jestem tu2", "do konca");
                 if (words[2].equals("EFlag") && words[1].equals("1")){
+                    if(words[5].equals("1")){
+                        words[3] = "-"+words[3];
+                    }
+                    if(words[6].equals("1")){
+                        words[4] = "-"+words[4];
+                    }
                     CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("enemy"+enemyCounter);
-                    enemyCounter=+1;
+                    Log.e("enemyCounter1", String.valueOf(enemyCounter));
+                    cotEvent.setUID("enemy"+String.valueOf(enemyCounter));
+                    enemyCounter=enemyCounter+1;
+                    Log.e("enemyCounter", String.valueOf(enemyCounter));
                     cotEvent.setType("a-h-G-U-C-I");
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
