@@ -477,7 +477,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                 Log.e("tabliczka", words[i]);
                 i++;
             }
-            Log.e("jestem tu1", "do konca");
+
 
             if(i>4){
                 if (words[2].equals("Flag") && words[1].equals("1")){
@@ -493,7 +493,7 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                     cotEvent.setType("a-f-G-U-C-I");
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
-                Log.e("jestem tu2", "do konca");
+
                 if (words[2].equals("EFlag") && words[1].equals("1")){
                     if(words[5].equals("1")){
                         words[3] = "-"+words[3];
@@ -509,6 +509,34 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                     cotEvent.setType("a-h-G-U-C-I");
                     CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
                 }
+
+                if (words[2].equals("EFlag") && words[1].equals("2")){
+                    if(words[5].equals("1")){
+                        words[3] = "-"+words[3];
+                    }
+                    if(words[6].equals("1")){
+                        words[4] = "-"+words[4];
+                    }
+                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                    cotEvent.setUID("enemy"+String.valueOf(words[7]));
+                    cotEvent.setType("a-h-G-U-C-I");
+                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                }
+
+                if (words[2].equals("Flag") && words[1].equals("2")){
+                    if(words[5].equals("1")){
+                        words[3] = "-"+words[3];
+                    }
+                    if(words[6].equals("1")){
+                        words[4] = "-"+words[4];
+                    }
+                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                    cotEvent.setUID("ally"+String.valueOf(words[7]));
+                    cotEvent.setType("a-f-G-U-C-I");
+                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                }
+
+
 
             }
 
