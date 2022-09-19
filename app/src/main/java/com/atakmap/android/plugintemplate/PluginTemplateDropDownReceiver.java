@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
+import android.os.DeadObjectException;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ import com.atakmap.android.dropdown.DropDown.OnStateListener;
 import com.atakmap.android.dropdown.DropDownReceiver;
 import com.atakmap.coremap.log.Log;
 import com.atakmap.coremap.maps.time.CoordinatedTime;
+
+import org.apache.commons.lang.StringUtils;
 
 import java.util.UUID;
 
@@ -463,88 +466,96 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
 
         public void PopUp(String read)
         {
-            Log.e("moja wiadomosc", read);
-            if (read.equals("1-DSM-0-0-0")){
-                createAircraftWithRotation();
-            }else if (read.equals("1-DSS-0-0-0")){
-                createAtackAircraftWithRotation();
+           // Log.e("moja wiadomosc", read);
+            if(StringUtils.isEmpty(read)){
+
+            }else{
+                if (read.equals("1-DSM-0-0-0")){
+                    createAircraftWithRotation();
+                }else if (read.equals("1-DSS-0-0-0")){
+                    createAtackAircraftWithRotation();
+                }
+
+                int i=0;
+                read="ClientMessage-" + read;
+                String[] words = read.split("-");
+                for (String word : words) {
+                    Log.e("tabliczka", words[i]);
+                    i++;
+                }
+
+
+                if(i>4){
+                    if (words[2].equals("Flag") && words[1].equals("1")){
+                        if(words[5].equals("1")){
+                            words[3] = "-"+words[3];
+                        }
+                        if(words[6].equals("1")){
+                            words[4] = "-"+words[4];
+                        }
+                        CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                        cotEvent.setUID("ally"+String.valueOf(allyCounter));
+                        allyCounter=allyCounter+1;
+                        cotEvent.setType("a-f-G-U-C-I");
+                        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                    }
+
+                    if (words[2].equals("EFlag") && words[1].equals("1")){
+                        if(words[5].equals("1")){
+                            words[3] = "-"+words[3];
+                        }
+                        if(words[6].equals("1")){
+                            words[4] = "-"+words[4];
+                        }
+                        CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                        Log.e("enemyCounter1", String.valueOf(enemyCounter));
+                        cotEvent.setUID("enemy"+String.valueOf(enemyCounter));
+                        enemyCounter=enemyCounter+1;
+                        Log.e("enemyCounter", String.valueOf(enemyCounter));
+                        cotEvent.setType("a-h-G-U-C-I");
+                        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                    }
+
+                    if (words[2].equals("EFlag") && words[1].equals("2")){
+                        if(words[5].equals("1")){
+                            words[3] = "-"+words[3];
+                        }
+                        if(words[6].equals("1")){
+                            words[4] = "-"+words[4];
+                        }
+                        CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                        cotEvent.setUID("enemy"+String.valueOf(words[7]));
+                        cotEvent.setType("a-h-G-U-C-I");
+                        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                    }
+
+                    if (words[2].equals("Flag") && words[1].equals("2")){
+                        if(words[5].equals("1")){
+                            words[3] = "-"+words[3];
+                        }
+                        if(words[6].equals("1")){
+                            words[4] = "-"+words[4];
+                        }
+                        CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
+                        cotEvent.setUID("ally"+String.valueOf(words[7]));
+                        cotEvent.setType("a-f-G-U-C-I");
+                        CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
+                    }
+
+
+
+                }
+
+
+
+
+
             }
-
-           int i=0;
-            read="ClientMessage-" + read;
-            String[] words = read.split("-");
-            for (String word : words) {
-                Log.e("tabliczka", words[i]);
-                i++;
-            }
-
-
-            if(i>4){
-                if (words[2].equals("Flag") && words[1].equals("1")){
-                    if(words[5].equals("1")){
-                        words[3] = "-"+words[3];
-                    }
-                    if(words[6].equals("1")){
-                        words[4] = "-"+words[4];
-                    }
-                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("ally"+String.valueOf(allyCounter));
-                    allyCounter=allyCounter+1;
-                    cotEvent.setType("a-f-G-U-C-I");
-                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-                }
-
-                if (words[2].equals("EFlag") && words[1].equals("1")){
-                    if(words[5].equals("1")){
-                        words[3] = "-"+words[3];
-                    }
-                    if(words[6].equals("1")){
-                        words[4] = "-"+words[4];
-                    }
-                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    Log.e("enemyCounter1", String.valueOf(enemyCounter));
-                    cotEvent.setUID("enemy"+String.valueOf(enemyCounter));
-                    enemyCounter=enemyCounter+1;
-                    Log.e("enemyCounter", String.valueOf(enemyCounter));
-                    cotEvent.setType("a-h-G-U-C-I");
-                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-                }
-
-                if (words[2].equals("EFlag") && words[1].equals("2")){
-                    if(words[5].equals("1")){
-                        words[3] = "-"+words[3];
-                    }
-                    if(words[6].equals("1")){
-                        words[4] = "-"+words[4];
-                    }
-                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("enemy"+String.valueOf(words[7]));
-                    cotEvent.setType("a-h-G-U-C-I");
-                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-                }
-
-                if (words[2].equals("Flag") && words[1].equals("2")){
-                    if(words[5].equals("1")){
-                        words[3] = "-"+words[3];
-                    }
-                    if(words[6].equals("1")){
-                        words[4] = "-"+words[4];
-                    }
-                    CotEvent cotEvent = createPoint(Double.parseDouble(words[3]), Double.parseDouble(words[4]));
-                    cotEvent.setUID("ally"+String.valueOf(words[7]));
-                    cotEvent.setType("a-f-G-U-C-I");
-                    CotMapComponent.getInternalDispatcher().dispatch(cotEvent);
-                }
-
-
-
-            }
-
-
 
 
 
         }
+
 
         public void run() {
 
@@ -558,7 +569,6 @@ public class PluginTemplateDropDownReceiver extends DropDownReceiver implements
                     break;
                 }
                 showMessage("Client : " + read, Color.GREEN);
-                Log.e("jestem tu4", "do konca");
             } catch (IOException e) {
                 e.printStackTrace();
             }
