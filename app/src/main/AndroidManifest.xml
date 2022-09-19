@@ -5,8 +5,8 @@
 
     <application 
         android:allowBackup="false"
-        android:icon="@drawable/car"
-        android:label="@string/app_name"
+        android:icon="@drawable/connector72x72"
+        android:label="ATAK Comunicator"
         android:description="@string/app_desc"
         android:extractNativeLibs="true"
         android:theme="@style/AppTheme" >
@@ -17,7 +17,7 @@
        <!-- allow for plugin discovery -->
        <activity android:name="com.atakmap.app.component"
            tools:ignore="MissingClass">
-           <intent-filter android:label="@string/app_name">
+           <intent-filter android:label="ATAK Comunicator">
               <action android:name="com.atakmap.app.component" />
            </intent-filter>
        </activity>
