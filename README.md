@@ -1,3 +1,3 @@
 
 # Project Title
-Wtyczka do ATAK  sierż. pchor. Jakub CHODARA
+Plugin for ATAK that let user to comunicate with ATAK messanger 
